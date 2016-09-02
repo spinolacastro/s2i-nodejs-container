@@ -9,6 +9,8 @@ RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
     yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
     yum clean all -y
+    
+COPY ./s2i/bin/ $STI_SCRIPTS_PATH
 # Drop the root user and make the content of /opt/app-root owned by user 1001
 RUN chown -R 1001:0 /opt/app-root && chmod -R ug+rwx /opt/app-root
 USER 1001
